@@ -13,20 +13,25 @@ const usersGet = (req = request, res = response) => {
   });
 }
 
-const usersPost = async( req, res ) => {
+const usersPost = async( req = request, res = response ) => {
 
-  const { name, email, password, rol } = req.body;
-  const user = new User({ name, email, password, rol });
+  const { name, email, password, role } = req.body;
+  const user = new User({ name, email, password, role });
 
-
+  // Verified is mail exist
+  const emailExist = await User.findOne({ email });
+  if (emailExist) {
+    return res.status(400).json({
+      msg: 'The email already exist'
+    });
+  }
   //Encrypt password
-  const salt = await bcryptjs.genSalt();
-  user.password = await bcryptjs.hash( password, salt );
+  const salt = bcryptjs.genSaltSync();
+  user.password = bcryptjs.hashSync( password, salt );
 
   await user.save();
 
   res.json({
-    msg: "post API - controller",
     user
   });
 }

@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const { check } = require("express-validator");
 
-const { isValidRole } = require("../helpers/db-validators");
+const { isValidRole, isValidEmail, existUserById } = require("../helpers/db-validators");
 const { checkFields } = require("../middlewares/check-fields");
 
 const { usersGet, 
@@ -20,11 +20,17 @@ router.post("/", [
         check('password', 'password should have 6 characters at least').isLength({ min: 6 }),
         check('email', 'Email is not valid').isEmail(),
         // check('role', 'role is not valid').isIn(['ADMIN_ROLE', 'USER_ROLE']),
+        check('email').custom(isValidEmail),
         check('role').custom( isValidRole ),
         checkFields
 ], usersPost);
 
-router.put("/:id", usersPut);
+router.put("/:id", [
+        check('id', 'id is not valid').isMongoId(),
+        check('id').custom( existUserById ),
+        check('role').custom( isValidRole ),
+        checkFields
+], usersPut);
 
 router.patch("/", usersPatch);
 

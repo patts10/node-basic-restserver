@@ -68,9 +68,6 @@ const usersPatch = (req, res) => {
 const usersDelete = async(req, res) => {
 
   const { id } = req.params;
-
-  // const user = await User.findByIdAndDelete( id );
-
   const user = await User.findByIdAndUpdate( id, { state: false } );
 
   res.json(user);

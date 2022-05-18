@@ -38,10 +38,21 @@ const existProductById = async(id) => {
   }
 }
 
+const allowedCollections = ( collection = '', collections = [] ) => {
+
+  const isIncluded = collections.includes( collection );
+  if (!isIncluded) {
+    throw new Error(`Collection ${ collection } is not allowed, ${ collections }`);
+  }
+
+return true;
+}
+
 module.exports = {
   isValidRole,
   isValidEmail,
   existUserById,
   existCategoryById,
-  existProductById
+  existProductById,
+  allowedCollections
 }

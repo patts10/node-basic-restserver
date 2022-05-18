@@ -8,5 +8,5 @@ module.exports = {
   ...dbValidators,
   ...generateJWT,
   ...googleVerify,
-  ...loadFile 
+  ...loadFile
 }

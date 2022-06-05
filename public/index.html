@@ -5,11 +5,25 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Google Sign-in</title>
-</head>
-<body>
 
-  <h1>Google Sing-in</h1>
-  <hr />
+  <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+<body class="container">
+
+  <div class="row mt-5">
+    <div class="col-sm6">
+
+      <h1>Google Sing-in</h1>
+      <hr />
+
+      <div class="g-signin2" data-onsuccess="onSignIn"></div>
+    </div>
+
+    <div class="col-sm6">
+
+    </div>
+  </div>
 
   <div id="g_id_onload"
          data-client_id="969741922305-b22b4cj93rfs8rje4hbbq5d4qi23fhhd.apps.googleusercontent.com"
@@ -25,7 +39,7 @@
          data-logo_alignment="left">
       </div>
 
-      <button id="google_signout">
+      <button id="google_signout" class="btn btn-primary mt-3">
         Sign out
       </button>
 
